@@ -1,3 +1,13 @@
+# About this branch
+
+Its name is self-explanatory. This branch had the main goal of adding the Fairy Type as an entirely new type to Pokémon Ruby and Sapphire, meaning the Type Mystery is still present.
+
+This research was originally started by Whack a Hack! User [Gorka/Turambar](https://whackahack.com/foro/u-35558/turambar/) the 2 of August from 2018.
+
+As of today, Tuesday 4th of June 2019, the research has been completed thanks to many Whack a Hack users (me included), with the help of Discord User "Shinny" and [BluRose](https://github.com/blurosie).
+
+[Click here to visit the original thread](https://whackahack.com/foro/t-56749/anadir-tipo-hada).
+
 # Pokémon Ruby and Sapphire [![Build Status][travis-badge]][travis]
 
 This is a disassembly of Pokémon Ruby and Sapphire.
