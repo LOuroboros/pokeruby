@@ -113,6 +113,18 @@ gTypeEffectiveness:: @ 81F9720
 	.byte    TYPE_STEEL,      TYPE_ICE, 20
 	.byte    TYPE_STEEL,     TYPE_ROCK, 20
 	.byte    TYPE_STEEL,    TYPE_STEEL,  5
+	.byte    TYPE_FAIRY, TYPE_FIGHTING, 20
+	.byte    TYPE_FAIRY,   TYPE_DRAGON, 20
+	.byte    TYPE_FAIRY,     TYPE_DARK, 20
+	.byte    TYPE_FAIRY,   TYPE_POISON,  5
+	.byte    TYPE_FAIRY,    TYPE_STEEL,  5
+	.byte    TYPE_FAIRY,     TYPE_FIRE,  5
+	.byte    TYPE_STEEL,    TYPE_FAIRY, 20
+	.byte   TYPE_POISON,    TYPE_FAIRY, 20
+	.byte TYPE_FIGHTING,    TYPE_FAIRY,  5
+	.byte      TYPE_BUG,    TYPE_FAIRY,  5
+	.byte     TYPE_DARK,    TYPE_FAIRY,  5
+	.byte   TYPE_DRAGON,    TYPE_FAIRY,  0
 	.byte          0xFE,          0xFE,  0
 	.byte   TYPE_NORMAL,    TYPE_GHOST,  0
 	.byte TYPE_FIGHTING,    TYPE_GHOST,  0

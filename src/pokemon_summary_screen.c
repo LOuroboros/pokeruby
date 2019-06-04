@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim_813F0F4.h"
+#include "constants/moves.h"
 #include "contest.h"
 #include "data2.h"
 #include "daycare.h"
@@ -150,6 +151,8 @@ extern const u16 gUnknown_08E94550[];
 extern const u16 gUnknown_08E94590[];
 extern const u8 gUnknown_08E73E88[];
 
+extern bool8 haveMarkingsBeenLoaded;
+
 EWRAM_DATA u8 gUnknown_020384F0 = 0;
 EWRAM_DATA struct Sprite *gUnknown_020384F4 = NULL;
 
@@ -271,6 +274,10 @@ static const union AnimCmd sSpriteAnim_TypeDark[] = {
     ANIMCMD_FRAME(TYPE_DARK * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
+static const union AnimCmd sSpriteAnim_TypeFairy[] = {
+    ANIMCMD_FRAME(TYPE_FAIRY * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
 static const union AnimCmd sSpriteAnim_CategoryCool[] = {
     ANIMCMD_FRAME((CONTEST_CATEGORY_COOL + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
@@ -311,6 +318,7 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_TypeIce,
     sSpriteAnim_TypeDragon,
     sSpriteAnim_TypeDark,
+    sSpriteAnim_TypeFairy,
     sSpriteAnim_CategoryCool,
     sSpriteAnim_CategoryBeauty,
     sSpriteAnim_CategoryCute,
@@ -356,6 +364,7 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
     [TYPE_ICE] = 14,
     [TYPE_DRAGON] = 15,
     [TYPE_DARK] = 13,
+    [TYPE_FAIRY] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = 13,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
@@ -917,6 +926,7 @@ static void SummaryScreenExit(u8 taskId)
 {
     PlaySE(SE_SELECT);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+	haveMarkingsBeenLoaded = FALSE;
     gTasks[taskId].func = SummaryScreen_DestroyTask;
 }
 
@@ -2588,7 +2598,7 @@ static void sub_80A015C(struct Pokemon *mon)
             if (pssData.page == PSS_PAGE_BATTLE_MOVES)
                 SummaryScreen_DrawTypeIcon(gBattleMoves[move].type, 87, ((2 * i) + 4) * 8, i);
             else
-                SummaryScreen_DrawTypeIcon(gContestMoves[move].contestCategory + 18, 87, ((2 * i) + 4) * 8, i);
+                SummaryScreen_DrawTypeIcon(gContestMoves[move].contestCategory + 19, 87, ((2 * i) + 4) * 8, i);
 
             SummaryScreen_PrintColoredText(gMoveNames[move], 13, 15, (2 * i) + 4);
             SummaryScreen_PlaceTextTile_White(1, 24, (2 * i) + 4);
@@ -2622,7 +2632,7 @@ static void sub_80A029C(struct Pokemon *mon)
     if (pssData.page == PSS_PAGE_BATTLE_MOVES)
         SummaryScreen_DrawTypeIcon(gBattleMoves[move].type, 87, 96, 4);
     else
-        SummaryScreen_DrawTypeIcon(gContestMoves[move].contestCategory + 18, 87, 96, 4);
+        SummaryScreen_DrawTypeIcon(gContestMoves[move].contestCategory + 19, 87, 96, 4);
 
     if (pssData.page == PSS_PAGE_BATTLE_MOVES)
         SummaryScreen_PrintColoredText(gMoveNames[move], 10, 15, 12);
@@ -4909,6 +4919,7 @@ static void sub_80A1DCC(struct Pokemon *mon)
 {
     DestroySprite(gUnknown_020384F4);
     sub_80A1D84(mon);
+    haveMarkingsBeenLoaded = TRUE;
 }
 
 static void sub_80A1DE8(struct Pokemon *mon)
